@@ -1,5 +1,3 @@
-// This file 
-
 #pragma once
 
 #include "timetable.h"
