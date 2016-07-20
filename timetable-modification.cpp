@@ -12,9 +12,7 @@ std::vector<Timetable> ProduceModifiedTimetables(const Timetable& initial_timeta
   Timetable posh_timetable, grotty_timetable;
   const int kTableSize = sorted_table.size();
   const Time kMaxTime = Time(1, 0);
-
   int last_index = kTableSize;
-
   Service current_service;
   for (int i = 0; i < kTableSize; i++) {
     current_service = sorted_table[i];

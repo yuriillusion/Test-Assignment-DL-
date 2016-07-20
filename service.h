@@ -10,6 +10,8 @@ public:
   };
 
   Time GetDuration() const;
+  // Returns true if a bus corresponding to *this departs before and comes
+  // later than the bus corresponding to a service.
   bool Contains(const Service& service) const;
   Company company() const;
 
