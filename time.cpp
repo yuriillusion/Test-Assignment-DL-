@@ -34,8 +34,7 @@ std::istream& operator>>(std::istream& in, Time& time) {
 }
 
 bool operator<(const Time& time1, const Time& time2){
-  if (time1.hours_ < time2.hours_ ||
-    time1.hours_ == Time::kHourBase - 1 && time2.hours_ == 0) {
+  if (time1.hours_ < time2.hours_) {
     return true;
   } else if (time1.hours_ == time2.hours_ && time1.minutes_ < time2.minutes_) {
     return true;

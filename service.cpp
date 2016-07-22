@@ -2,13 +2,13 @@
 
 Time Service::GetDuration() const {
   int hour_difference = arrival_time_.hours() - departure_time_.hours();
-  if (hour_difference < 0) {
-    hour_difference += Time::kHourBase;
-  }
   int minute_difference = arrival_time_.minutes() - departure_time_.minutes();
   if (minute_difference < 0) {
     minute_difference += Time::kMinuteBase;
     hour_difference -= 1;
+  }
+  if (arrival_time_ < departure_time_) {
+    hour_difference += Time::kHourBase;
   }
   return Time(hour_difference, minute_difference);
 }

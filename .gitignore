@@ -254,3 +254,4 @@ paket-files/
 # my
 *.vcxproj
 *.vcxproj.filters
+*.sln
