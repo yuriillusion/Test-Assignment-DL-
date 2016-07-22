@@ -13,6 +13,7 @@ public:
   // Returns true if a bus corresponding to *this departs before and comes
   // later than the bus corresponding to a service.
   bool Contains(const Service& service) const;
+  bool IsNightService() const;
   Company company() const;
 
   friend std::istream& operator>>(std::istream& in, Service& service);
@@ -23,4 +24,5 @@ private:
   Company company_;
   Time departure_time_;
   Time arrival_time_;
+  bool is_night_service_;
 };

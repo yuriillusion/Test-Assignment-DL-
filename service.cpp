@@ -7,15 +7,30 @@ Time Service::GetDuration() const {
     minute_difference += Time::kMinuteBase;
     hour_difference -= 1;
   }
-  if (arrival_time_ < departure_time_) {
+  if (IsNightService()) {
     hour_difference += Time::kHourBase;
   }
   return Time(hour_difference, minute_difference);
 }
 
+bool Service::IsNightService() const {
+  return is_night_service_;
+}
+
 bool Service::Contains(const Service& service) const {
-  return departure_time_ <= service.departure_time_ &&
-    arrival_time_ >= service.arrival_time_;
+  const bool is_night1 = IsNightService();
+  const bool is_night2 = service.IsNightService();
+  if (is_night1 && is_night2 || !is_night1 && !is_night2) {
+    return departure_time_ <= service.departure_time_ &&
+      arrival_time_ >= service.arrival_time_;
+  } else if (is_night1) {
+    return departure_time_ <= service.departure_time_ &&
+      service.arrival_time_ < Time(Time::kHourBase, 0U) ||
+      service.departure_time_ >= Time(0U, 0U) &&
+      service.arrival_time_ <= arrival_time_;
+  } else {
+    return false;
+  }
 }
 
 Service::Company Service::company() const {
@@ -31,6 +46,7 @@ std::istream& operator>>(std::istream& in, Service& service) {
     service.company_ = Service::kGrotty;
   }
   in >> service.departure_time_ >> service.arrival_time_;
+  service.is_night_service_ = (service.arrival_time_ < service.departure_time_);
   return in;
 }
 
