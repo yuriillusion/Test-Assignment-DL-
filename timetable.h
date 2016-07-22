@@ -9,7 +9,7 @@ public:
   Timetable(const Timetable& timetable);
 
   Timetable Sort() const;
-  void Push(Service service);
+  void Push(const Service& service);
   const std::vector<Service>& table() const;
 
   friend std::istream& operator>>(std::istream& in, Timetable& timetable);

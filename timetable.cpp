@@ -13,7 +13,7 @@ Timetable Timetable::Sort() const {
   return sorted_timetable;
 }
 
-void Timetable::Push(Service service) {
+void Timetable::Push(const Service& service) {
   table_.push_back(service);
 }
 

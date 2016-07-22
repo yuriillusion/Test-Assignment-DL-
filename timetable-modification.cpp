@@ -7,8 +7,8 @@ Timetable ReadInitialTable(std::istream& in, int capacity) {
 }
 
 std::vector<Timetable> ProduceModifiedTimetables(const Timetable& initial_timetable) {
-  Timetable sorted_timetable = initial_timetable.Sort();
-  const std::vector<Service> sorted_table = sorted_timetable.table();
+  const Timetable sorted_timetable = initial_timetable.Sort();
+  const std::vector<Service>& sorted_table = sorted_timetable.table();
   Timetable posh_timetable, grotty_timetable;
   const int kTableSize = sorted_table.size();
   const Time kMaxTime = Time(1, 0);
@@ -31,6 +31,7 @@ std::vector<Timetable> ProduceModifiedTimetables(const Timetable& initial_timeta
       last_service = current_service;
     }
   }
+
   return{ posh_timetable, grotty_timetable };
 }
 
